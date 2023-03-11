@@ -12,6 +12,13 @@ export default defineConfig({
   server: {
     port: 3000
   },
+  // proxy: {
+  //   '/api': {
+  //     target: 'http://localhost:8010/',
+  //     changeOrigin: true,
+  //     rewrite: (path) => path.replace(/^\/api/, '') // 不可以省略rewrite
+  //   }
+  // },
   plugins: [vue(),
   Components({ resolvers: [VantResolver()] }),
   AutoImport({

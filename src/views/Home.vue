@@ -8,6 +8,7 @@
         <el-button type="primary">Primary</el-button>
 
         <div><i class="iconfont icon-logo"></i></div>
+        <i class="iconfont icon-more"></i>
     </div>
     <nav-bar />
 </template>
