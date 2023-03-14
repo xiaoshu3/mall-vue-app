@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-// import './style.css'
+import './style2.css'
 import App from './App.vue'
 import router from '@/router'
 import 'lib-flexible/flexible'
