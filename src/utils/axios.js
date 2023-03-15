@@ -12,7 +12,7 @@ axios.defaults.baseURL = 'http://localhost:8010/v1'
 axios.defaults.withCredentials = true
 axios.defaults.headers['X-Requested-With'] = 'XMLHttpRequest'
 // 本课程判断用户登录状态是通过 token 来实现
-axios.defaults.headers['token'] = localStorage.getItem('token') || ''
+// axios.defaults.headers['token'] = localStorage.getItem('token') || ''
 // post 请求时，发送 json 形式的数据包
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 
