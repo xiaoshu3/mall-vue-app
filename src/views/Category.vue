@@ -51,7 +51,7 @@ const currentIndex = ref(0)
 
 
 const state = reactive({
-    categoryData: [{ 'name': '', }],
+    categoryData: [{ 'name': '', 'categorys': [], 'brands': [] }],
     // categoryIndex: 0,
 })
 
@@ -64,11 +64,15 @@ onMounted(async () => {
     showLoadingToast('加载中...')
     const { data } = await getCategory()
     closeToast()
-    state.categoryData = data
 
+    if (data !== null) {
+        state.categoryData = data
+    }
 
-    console.log(typeof (state.categoryData[0].name))
-    console.log((state.categoryData[0].name))
+    // console.log(state.categoryData)
+
+    // console.log(typeof (state.categoryData[0].name))
+    // console.log((state.categoryData[0].name))
 
 })
 
@@ -104,6 +108,15 @@ const selectBrand = (item) => {
 
         .category-img {
             .wh(100%, 100%)
+        }
+
+        .product-title {
+            font-size: 12px;
+            font-family: PingFangSC-Regular;
+            // overflow: hidden;
+            color: #666;
+            letter-spacing: 0;
+            text-align: center;
         }
     }
 }

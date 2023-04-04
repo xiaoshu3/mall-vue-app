@@ -63,6 +63,7 @@ export default {
     .boxSizing();
     color: #252525;
     background: #fff;
+    .boxSizing();
 
     .iconfont {
         font-size: 20px;
