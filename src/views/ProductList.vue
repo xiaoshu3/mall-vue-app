@@ -5,7 +5,7 @@
             <i class="iconfont icon-left" @click="goBack"></i>
             <div class="header-search">
                 <van-icon name="search" class="search-icon" />
-                <router-link tag="span" to="./home">
+                <router-link tag="span" to="./search">
                     <input type="text" class="search-text" readonly="readonly" v-model="state.keyword" />
                 </router-link>
             </div>
@@ -58,7 +58,7 @@ const state = reactive({
     keyword: route.query.keyword || '',
     sort: 'id',
     order: 'asc',
-    // frompath: route.query.from || '',
+    frompath: route.query.from || '',
     specGroupId: route.query.specGroupId || '',
     categoryId: route.query.categoryId || '',
     brandId: route.query.brandId || '',
@@ -95,8 +95,9 @@ const init = async () => {
 
     state.productList = state.productList.concat(data)
     state.totalPage = pager.TotalPage
+    // console.log( pager.TotalPage)
     state.loading = false
-    if (state.page >= state.totalPage) state.finished = true
+    if (pager.TotalPage == 0 || state.page >= state.totalPage ) state.finished = true
 
 }
 

@@ -5,7 +5,7 @@
             <router-link tag="i" to="./category"><i class="iconfont icon-logo"></i></router-link>
             <div class="header-search">
                 <van-icon name="search" class="search-icon" />
-                <router-link tag="span" to="./product-list?from=home">
+                <router-link tag="span" to="./search?from=home">
                     <span class="search-title">冰箱</span>
                 </router-link>
             </div>
