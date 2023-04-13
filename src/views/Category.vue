@@ -45,10 +45,11 @@ import { getCategory } from "@/service/good"
 import { reactive, onMounted, ref, } from 'vue'
 import { showLoadingToast, closeToast } from 'vant'
 import sHeader from '@/components/SimpleHeader.vue'
+import router from '../router'
 
 const domHeight = ref(0)
 const currentIndex = ref(0)
-
+let specGroupId = 1
 
 const state = reactive({
     categoryData: [{ 'name': '', 'categorys': [], 'brands': [] }],
@@ -77,15 +78,34 @@ onMounted(async () => {
 })
 
 const selectMenu = (index) => {
-
+    specGroupId = index
+    // console.log(specGroupId)
 }
 
 const selectCategory = (item) => {
+    // console.log(item)
+    router.push({
+        path: '/product-list',
+        query: {
+            from: 'category',
+            keyword: item.name,
+            categoryId: item.id,
+        }
 
+    })
 }
 
 const selectBrand = (item) => {
-
+    // console.log(item)
+    router.push({
+        path: '/product-list',
+        query: {
+            from: 'category',
+            keyword: item.name + ' ' + state.categoryData[specGroupId].name,
+            brandId: item.id,
+            specGroupId: specGroupId,
+        }
+    })
 }
 
 </script>

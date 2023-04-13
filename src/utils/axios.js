@@ -6,7 +6,8 @@ import { setLocal, getLocal } from '@/common/js/utils'
 console.log('import.meta.env', import.meta.env) // 环境变量获取
 // baseURL 基础路径配置，backend-api-01.newbee.ltd/api/v1 为线上请求地址，这里只有一个地址，所以就不做区分
 // axios.defaults.baseURL = import.meta.env.MODE == 'development' ? '//backend-api-01.newbee.ltd/api/v1' : '//backend-api-01.newbee.ltd/api/v1'
-axios.defaults.baseURL = 'http://localhost:8010/v1'
+// axios.defaults.baseURL = 'http://localhost:8010/v1'
+axios.defaults.baseURL = '/api'
 
 // 跨域请求是要不要携带cookie，本课程没有跨域请求的情况
 axios.defaults.withCredentials = true

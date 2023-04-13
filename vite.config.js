@@ -19,13 +19,13 @@ export default defineConfig({
     //     rewrite: (path) => path.replace(/\/api/, '')  // 路径重写
     //   }
     // }
-    // proxy: {
-    //   '/api': {
-    //     target: 'http://localhost:8010/',
-    //     changeOrigin: true,
-    //     rewrite: (path) => path.replace(/\/api/, '')  // 路径重写
-    //   }
-    // }
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8010/v1',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/\/api/, '')  // 路径重写
+      }
+    }
   },
 
   plugins: [vue(),
