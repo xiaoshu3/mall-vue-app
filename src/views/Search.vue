@@ -47,7 +47,7 @@ const goBack = () => {
 
 const getSearch = () => {
     if (state.keyword != '') {
-        router.push({
+        router.replace({
             path: '/product-list',
             query: {
                 from: 'search',

@@ -88,8 +88,20 @@ axios.interceptors.response.use(res => {
         showFailToast(err.response.data.message)
 
         // console.log(err.response)
-        if (err.response.status == 401 && window.location.hash !== '#/login') {
-            router.push({ path: '/login' })
+        // if (err.response.status == 401 && window.location.hash !== '#/login') {
+        //     router.push({ path: '/login' })
+        // }
+        if (err.response.status == 401) {
+            return axios.post('/api/auth/login/refresh-token').then(async response => {
+                if (response.data) {
+                    setLocal('token', res.data.token)
+                }
+            }).catch(error => {
+                setLocal('token', '')
+                if (window.location.hash !== '#/login') {
+                    router.push({ path: '/login' })
+                }
+            })
         }
     }
 

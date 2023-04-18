@@ -42,6 +42,13 @@
             </van-tabs>
         </div>
 
+        <van-action-bar>
+            <van-action-bar-icon icon="chat-o" text="客服" />
+            <van-action-bar-icon icon="cart-o" text="购物车" />
+            <van-action-bar-button type="warning" text="加入购物车" />
+            <van-action-bar-button type="danger" text="立即购买" />
+        </van-action-bar>
+
         <!-- <div v-html="state.goodsContentList[0] || ''"></div> -->
     </div>
 </template>
@@ -236,7 +243,7 @@ let videoBtn = document.getElementsByClassName("player-play-btn")
 }
 
 .ppcloud-player .player-play-btn {
-    /* display: none; */
+    display: none;
     position: absolute;
     left: 50%;
     top: 50%;
