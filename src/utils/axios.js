@@ -70,13 +70,16 @@ axios.interceptors.response.use(res => {
 
     // console.log(res)
     // console.log(res.status)
-    if (res.data && window.location.hash == '#/login') {
+    if (res.data.token) {
+        // console.log(res)
         setLocal('token', res.data.token)
+        window.location.reload()
         // axios.defaults.headers['Authorization'] = `Bearer ${res.data.token}`;
     }
 
     return Promise.resolve(res.data)
 }, err => {
+    // console.log(err.response)
     if (err.response.data.errors) {
         // console.log(err.response.data.errors)
         // console.log(JSON.stringify(err.response.data.errors))
@@ -85,24 +88,35 @@ axios.interceptors.response.use(res => {
         showFailToast(Object.values(obj).toString())
     } else {
         // console.log(err.response.data.message)
-        showFailToast(err.response.data.message)
+
 
         // console.log(err.response)
         // if (err.response.status == 401 && window.location.hash !== '#/login') {
         //     router.push({ path: '/login' })
         // }
         if (err.response.status == 401) {
-            return axios.post('/api/auth/login/refresh-token').then(async response => {
-                if (response.data) {
-                    setLocal('token', res.data.token)
-                }
-            }).catch(error => {
-                setLocal('token', '')
+            if (getLocal("token")) {
+                return axios.post('/auth/login/refresh-token').then(async response => {
+                    if (response.data) {
+                        // console.log(res.data)
+                        if (res.data.token) {
+                            setLocal('token', res.data.token)
+                            window.location.reload()
+                        }
+                    }
+                }).catch(error => {
+                    setLocal('token', '')
+                    if (window.location.hash !== '#/login') {
+                        router.push({ path: '/login' })
+                    }
+                })
+            } else {
                 if (window.location.hash !== '#/login') {
                     router.push({ path: '/login' })
                 }
-            })
+            }
         }
+        showFailToast(err.response.data.message)
     }
 
     return Promise.reject(err)

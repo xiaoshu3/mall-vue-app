@@ -81,7 +81,12 @@ const onSubmit = async (values) => {
     }
 
     if (state.type == 'login') {
-        const { data } = await loginUsingPassword({
+        // const { data } = await loginUsingPassword({
+        //     login_id: values.username,
+        //     password: values.password
+        // })
+
+        await loginUsingPassword({
             login_id: values.username,
             password: values.password
         })
