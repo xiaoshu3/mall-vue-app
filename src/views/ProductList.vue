@@ -52,6 +52,7 @@ import { getGoodsList } from '@/service/good'
 import { reactive } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
+
 const route = useRoute()
 const router = useRouter()
 const state = reactive({

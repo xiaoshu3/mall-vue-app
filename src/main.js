@@ -6,6 +6,7 @@ import 'lib-flexible/flexible'
 import 'vant/es/toast/style'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+import { createPinia } from 'pinia'
 
 import {
     ActionBar, ActionBarIcon, ActionBarButton, Divider, Popup, Overlay,
@@ -21,6 +22,7 @@ const app = createApp(App)
 // 注册路由
 app.use(router)
 app.use(ElementPlus)
+app.use(createPinia())
 
 app.use(ActionBarButton)
     .use(ActionBarIcon)

@@ -44,8 +44,8 @@
 
         <van-action-bar>
             <van-action-bar-icon icon="chat-o" text="客服" />
-            <van-action-bar-icon icon="cart-o" text="购物车" />
-            <van-action-bar-button type="warning" text="加入购物车" />
+            <van-action-bar-icon icon="cart-o" :badge="!cart.count ? '' : cart.count" @click="goTo()" text="购物车" />
+            <van-action-bar-button type="warning" @click="handleAddCart" text="加入购物车" />
             <van-action-bar-button type="danger" text="立即购买" />
         </van-action-bar>
 
@@ -61,7 +61,11 @@ import { useRoute, useRouter } from 'vue-router'
 import { getGoodsDetail } from '@/service/good'
 import { showLoadingToast, closeToast, showToast, colProps } from 'vant'
 import { onUpdated } from 'vue'
+import { showSuccessToast } from 'vant'
+import { useCartStore } from '@/stores/cart'
+import {addCart} from '@/service/cart'
 
+const cart = useCartStore()
 const tabActive = ref(0)
 const domWidth = ref(400)
 const route = useRoute()
@@ -80,7 +84,7 @@ onMounted(async () => {
     showLoadingToast("加载中")
     const { data } = await getGoodsDetail(id)
     domWidth.value = (window.innerWidth) + 'px'
-    // cart.updateCart()
+    cart.updateCart()
 
     state.carouselsList = data.carousels.split(",")
     // state.carouselsList.reverse()
@@ -116,6 +120,17 @@ const videoCntrols = () => {
     // console.log(v.attributes)
 }
 
+const goTo = ()=>{
+    router.push({ path: '/cart' })
+}
+
+const handleAddCart = async()=>{
+    // console.log(state.goodsDetail)
+    const {success} = await addCart({spu_id: state.goodsDetail.id,add_num: 1})
+    // console.log(success)
+    if (success == true) showSuccessToast('添加成功')
+    cart.updateCart()
+}
 
 </script>
 
