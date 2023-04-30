@@ -18,3 +18,11 @@ export function deleteCartItem(params) {
         data: params
     })
 }
+
+export function getByCartItemIds(params) {
+    return axios.get('/shop-cart/settle', {
+        params: {
+            CartItemIds: params
+        }
+    })
+}

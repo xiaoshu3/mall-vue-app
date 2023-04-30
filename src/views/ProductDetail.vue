@@ -54,8 +54,7 @@
 </template>
 
 
-<script setup>
-import sHeader from '@/components/SimpleHeader.vue'
+c
 import { reactive, onMounted, nextTick, ref, } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { getGoodsDetail } from '@/service/good'

@@ -6,12 +6,13 @@
                 <van-swipe-cell :right-width="50" v-for="(item, index) in state.list" :key="index">
                     <div class="good-item">
                         <van-checkbox :name="item.id" />
-                        <div class="good-img"  @click="goToGoodDetail(item.id)"><img :src="item.goods_cover_img" alt=""></div>
+                        <div class="good-img" @click="goToGoodDetail(item.id)"><img :src="item.goods_cover_img" alt="">
+                        </div>
                         <div class="good-desc">
-                            <div class="good-title"  @click="goToGoodDetail(item.id)">
+                            <div class="good-title" @click="goToGoodDetail(item.id)">
                                 <!-- <span>{{ item.title }}</span> -->
                                 <div class="van-multi-ellipsis--l2">{{ item.title }}</div>
-                                <span class="good-count" >x{{ item.goods_count }}</span>
+                                <span class="good-count">x{{ item.goods_count }}</span>
                             </div>
                             <div class="good-btn">
                                 <div class="price">¥{{ item.price }}</div>
@@ -27,17 +28,15 @@
             </van-checkbox-group>
 
         </div>
-        <van-submit-bar v-if="state.list.length > 0" class="submit-all van-hairline--top" :price="total*100" button-text="结算"
-            button-type="primary" @submit="onSubmit">
+        <van-submit-bar v-if="state.list.length > 0" class="submit-all van-hairline--top" :price="total * 100"
+            button-text="结算" button-type="primary" @submit="onSubmit">
             <van-checkbox @click="allCheck" v-model:checked="state.checkAll">全选</van-checkbox>
         </van-submit-bar>
 
 
-        
+
         <!-- <nav-bar /> -->
     </div>
-
-    
 </template>
 
 <script setup>
@@ -54,7 +53,7 @@ const state = reactive({
     list: [], // 购物车商品列表
     result: [], // 选中的购物车商品 id 数组
 
-    checked:false,
+    checked: false,
     checkAll: true
 })
 onMounted(() => {
@@ -136,7 +135,11 @@ const onSubmit = async () => {
         showFailToast('请选择商品进行结算')
         return
     }
-
+    const params = JSON.stringify(state.result)
+    router.push({
+        path: 'create-order',
+        query: { cartItemIds: params }
+    })
     // ToDo
 }
 
@@ -149,7 +152,7 @@ const allCheck = () => {
 }
 
 
-const goToGoodDetail =(goodId)=>{
+const goToGoodDetail = (goodId) => {
     let id = Number(goodId)
     router.replace({
         path: `/products/${goodId}`,
@@ -188,7 +191,7 @@ const goToGoodDetail =(goodId)=>{
                     display: flex;
                     justify-content: space-between;
 
-                    .good-count{
+                    .good-count {
                         padding-left: 8px;
                         // font-size:5px;
                     }
